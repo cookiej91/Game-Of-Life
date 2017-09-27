@@ -11,6 +11,20 @@ Boolean:
 
 var cell;
 
+//grid dimensions
+var height = 0;
+var width = 0
+
+//height made from 2d array
+function makeGridHeight(rows) {
+  var arr = [];
+
+  for(let count = 0; count < rows; count++) {
+    arr[i] = [];
+  }
+  return arr;
+}
+
 //Underpopulation
 if(cell < 2 neighbours) {
   cell = 0;
