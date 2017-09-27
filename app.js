@@ -6,14 +6,12 @@
 
 Boolean:
 1 == Cell is alive
-0 == Cel is Dead
+0 == Cell is Dead
 */
 
-var cell;
-
 //grid dimensions
-var height = 0;
-var width = 0
+var gridHeight = 0;
+var gridWidth = 0;
 
 //height made from 2d array
 function makeGridHeight(rows) {
@@ -23,6 +21,20 @@ function makeGridHeight(rows) {
     arr[i] = [];
   }
   return arr;
+}
+
+//populate grid with cells
+function populateGrid() {
+  for (var r = 0; r < gridHeight; r++) {
+    for (var c = 0; c < gridWidth; c++) {
+      gridCanvas[r][c] = Math.round(Math.random());
+    }
+  }
+}
+
+//display grid on canvas
+function display() {
+
 }
 
 //Underpopulation
