@@ -9,34 +9,26 @@ Boolean:
 0 == Cell is Dead
 */
 
+//display grid on canvas
+var canvas = document.getElementById("canvas");
+function display() {
+
+};
+
 //grid dimensions
-var gridHeight = 0;
-var gridWidth = 0;
-
-//height made from 2d array
-function makeGridHeight(rows) {
-  var arr = [];
-
-  for(let count = 0; count < rows; count++) {
-    arr[i] = [];
-  }
-  return arr;
-}
+var height = 0;
+var width = 0;
 
 //populate grid with cells
 function populateGrid() {
-  for (var r = 0; r < gridHeight; r++) {
-    for (var c = 0; c < gridWidth; c++) {
-      gridCanvas[r][c] = Math.round(Math.random());
+  for (var r = 0; r < height; r++) {
+    for (var c = 0; c < width; c++) {
+      grid[r][c]
     }
   }
 }
 
-//display grid on canvas
-function display() {
-
-}
-
+/*
 //Underpopulation
 if(cell < 2 neighbours) {
   cell = 0;
@@ -57,3 +49,19 @@ if(cell == 3 neighbours) {
   cell = 1;
   cell.child = 1;
 }
+
+Neighbours:
+cell[height][width] = current cell
+
+[h-1][w-1] = top left
+[h-1][w] = top centre
+[h-1][w+1] = top right
+
+[h][w-1] middle left
+[h][w+1] middle right
+
+[h+1][w-1] bottom left
+[h+1][w]  bottom centre
+[h+1][w+1] bottom right
+
+*/
