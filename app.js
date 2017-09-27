@@ -10,7 +10,6 @@ Boolean:
 */
 
 //display grid on canvas
-var canvas = document.getElementById("canvas");
 function display() {
 
 };
@@ -33,33 +32,20 @@ function neighbourState(cell, neighbour) {
   //if the cell is live then check GoL conditions
   if(cell = 1) {
     if(neighbour < 2) {
+      //Underpopulation
       cell = 0;
     } else if(neighbour === 2) {
+      //Harmony
       cell = 1;
     } else if(neighbour > 3) {
+      //Overpopulation
       cell = 0;
     } else if(neighbour === 3) {
+      //Harmony/Next Gen
       cell = 1;
     }
-  }
-
-  else if (cell = 0 && neighbour === 3) {
+  } else if (cell = 0 && neighbour === 3) {
+    //Next Generation
     cell = 1
   }
 }
-
-/*
-Neighbours:
-cell[height][width] = current cell
-
-[h-1][w-1] = top left
-[h-1][w] = top centre
-[h-1][w+1] = top right
-
-[h][w-1] middle left
-[h][w+1] middle right
-
-[h+1][w-1] bottom left
-[h+1][w]  bottom centre
-[h+1][w+1] bottom right
-*/
