@@ -28,28 +28,27 @@ function populateGrid() {
   }
 }
 
+function neighbourState(cell, neighbour) {
+  //check neighbour states and if they fit the condition change accordingly
+  //if the cell is live then check GoL conditions
+  if(cell = 1) {
+    if(neighbour < 2) {
+      cell = 0;
+    } else if(neighbour === 2) {
+      cell = 1;
+    } else if(neighbour > 3) {
+      cell = 0;
+    } else if(neighbour === 3) {
+      cell = 1;
+    }
+  }
+
+  else if (cell = 0 && neighbour === 3) {
+    cell = 1
+  }
+}
+
 /*
-//Underpopulation
-if(cell < 2 neighbours) {
-  cell = 0;
-}
-
-//NextGen
-if(cell == 2 neighbours) {
-  cell = 1;
-}
-
-//Overpopulation
-if(cell > 3 neighbours) {
-  cell = 0;
-}
-
-//Reproduction will also have NextGen logic built in
-if(cell == 3 neighbours) {
-  cell = 1;
-  cell.child = 1;
-}
-
 Neighbours:
 cell[height][width] = current cell
 
@@ -63,5 +62,4 @@ cell[height][width] = current cell
 [h+1][w-1] bottom left
 [h+1][w]  bottom centre
 [h+1][w+1] bottom right
-
 */
