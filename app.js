@@ -8,44 +8,28 @@ Boolean:
 1 == Cell is alive
 0 == Cell is Dead
 */
+// declare bool values to set cell to on or off
+var dead = false;
+var alive = true;
 
-//display grid on canvas
-function display() {
+//declare gridArray
+var gridArray = [];
 
-};
+//populate grid with cells takes height and width
+function populateGrid(height, width) {
+  for (let i = 0; i < height; i++) {
+    gridArray[i] = [];
+    let parentDiv = document.createElement('div');
+    parentDiv.className = "inline";
+    document.body.appendChild(parentDiv);
 
-//grid dimensions
-var height = 0;
-var width = 0;
-
-//populate grid with cells
-function populateGrid() {
-  for (var r = 0; r < height; r++) {
-    for (var c = 0; c < width; c++) {
-      grid[r][c]
+    for (let j = 0; j < width; j++) {
+      let childDiv = document.createElement('div');
+      gridArray[i][j] = dead;
+      childDiv.innerHTML = gridArray[i][j];
+      parentDiv.appendChild(childDiv)
     }
   }
 }
 
-function neighbourState(cell, neighbour) {
-  //check neighbour states and if they fit the condition change accordingly
-  //if the cell is live then check GoL conditions
-  if(cell = 1) {
-    if(neighbour < 2) {
-      //Underpopulation
-      cell = 0;
-    } else if(neighbour === 2) {
-      //Harmony
-      cell = 1;
-    } else if(neighbour > 3) {
-      //Overpopulation
-      cell = 0;
-    } else if(neighbour === 3) {
-      //Harmony/Next Gen
-      cell = 1;
-    }
-  } else if (cell = 0 && neighbour === 3) {
-    //Next Generation
-    cell = 1
-  }
-}
+populateGrid(20,20);
