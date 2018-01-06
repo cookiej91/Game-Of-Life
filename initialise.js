@@ -19,15 +19,24 @@ var gridArray = [];
 function populateGrid(height, width) {
   for (let i = 0; i < height; i++) {
     gridArray[i] = [];
-    let parentDiv = document.createElement('div');
-    parentDiv.className = "inline";
-    document.body.appendChild(parentDiv);
+    let row = document.createElement('div');
+    row.className = "inline";
+    document.body.appendChild(row);
 
     for (let j = 0; j < width; j++) {
-      let childDiv = document.createElement('div');
+      let cell = document.createElement('div');
+      cell.id = `${i}:${j}`
       gridArray[i][j] = dead;
-      childDiv.innerHTML = gridArray[i][j];
-      parentDiv.appendChild(childDiv)
+      cell.innerHTML = gridArray[i][j];
+      cell.setAttribute('x', `${i}`)
+      cell.setAttribute('y', `${j}`)
+      row.appendChild(cell)
+      cell.addEventListener('click', function(event) {
+        let x = event.currentTarget.getAttribute('x');
+        let y = event.currentTarget.getAttribute('y');
+        gridArray[x][y] = !gridArray[x][y]
+        render(x,y);
+      });
     }
   }
 }
