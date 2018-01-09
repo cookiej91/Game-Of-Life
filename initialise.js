@@ -42,10 +42,15 @@ function render(cellPosX, cellPosY) {
   cell.innerHTML = gridArray[cellPosX][cellPosY];
 }
 
+/*
+rules and step by step function
+1) Cell < 2 Neighbours cell dies (Underpopulation)
+2) Cell has exactly 2 or 3 neighbours Cell lives (NextGen)
+3) Cell > 3 Neighbours cell dies (Overpopulation)
+4) Empty cell has EXACTLY 3 neighbours cell becomes alive (Reproduction)*/
 function checkRules(cellPosX, cellPosY) {
   let currentCell == gridArray[cellPosX][cellPosY]
   let cellsAlive = 0;
-  //kill cell if Underpopulated
   if (currentCell){
     if (gridArray[cellPosX + 1][cellPosY + 1]) {cellsAlive + 1}
     if (gridArray[cellPosX + 1][cellPosY]) {cellsAlive + 1}
@@ -53,9 +58,9 @@ function checkRules(cellPosX, cellPosY) {
     if (gridArray[cellPosX - 1][cellPosY - 1]) {cellsAlive + 1}
     if (gridArray[cellPosX - 1][cellPosY]) {cellsAlive + 1}
     if (gridArray[cellPosX][cellPosY - 1]) {cellsAlive + 1}
-    if (cellsAlive < 2) {currentCell = false}
-    if (cellsAlive === 2 || cellsAlive === 3) {currentCell = true}
-    if (cellsAlive > 3) {currentCell = false}
+    if (cellsAlive < 2) {currentCell = false} //Underpopulation
+    if (cellsAlive === 2 || cellsAlive === 3) {currentCell = true} //NextGen
+    if (cellsAlive > 3) {currentCell = false} //Overpopulation
   } else if(!currentCell) {
     if (gridArray[cellPosX + 1][cellPosY + 1]) {cellsAlive + 1}
     if (gridArray[cellPosX + 1][cellPosY]) {cellsAlive + 1}
@@ -63,17 +68,7 @@ function checkRules(cellPosX, cellPosY) {
     if (gridArray[cellPosX - 1][cellPosY - 1]) {cellsAlive + 1}
     if (gridArray[cellPosX - 1][cellPosY]) {cellsAlive + 1}
     if (gridArray[cellPosX][cellPosY - 1]) {cellsAlive + 1}
-    if (cellsAlive === 3) {currentCell = true}
+    if (cellsAlive === 3) {currentCell = true} //Reproduction
   }
-
-
 }
-/*
-rules and step by step function
-1) Cell < 2 Neighbours cell dies (Underpopulation)
-2) Cell has exactly 2 or 3 neighbours Cell lives (NextGen)
-3) Cell > 3 Neighbours cell dies (Overpopulation)
-4) Empty cell has EXACTLY 3 neighbours cell becomes alive (Reproduction)*/
-
-
 populateGrid(20,20);
