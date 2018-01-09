@@ -31,6 +31,7 @@ function populateGrid(height, width) {
         let x = event.currentTarget.getAttribute('x');
         let y = event.currentTarget.getAttribute('y');
         gridArray[x][y] = !gridArray[x][y]
+        checkRules(x,y);
         render(x,y);
       });
     }
@@ -51,25 +52,30 @@ rules and step by step function
 function checkRules(cellPosX, cellPosY) {
   let currentCell = gridArray[cellPosX][cellPosY]
   let cellsAlive = 0;
+  let toIntX = parseInt(cellPosX);
+  let toIntY = parseInt(cellPosY);
   if (currentCell){
-    if (gridArray[cellPosX + 1][cellPosY + 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX + 1][cellPosY]) {cellsAlive + 1}
-    if (gridArray[cellPosX][cellPosY + 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX - 1][cellPosY - 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX - 1][cellPosY]) {cellsAlive + 1}
-    if (gridArray[cellPosX][cellPosY - 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX + 1][cellPosY - 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX - 1][cellPosY + 1]) {cellsAlive + 1}
+    console.log(cellPosX)
+    if (gridArray[toIntX + 1][toIntY + 1] === true) {cellsAlive + 1}
+    if (gridArray[toIntX + 1][toIntY]) {cellsAlive + 1}
+    if (gridArray[cellPosX][toIntY + 1]) {cellsAlive + 1}
+    if (gridArray[toIntX - 1][toIntY - 1]) {cellsAlive + 1}
+    if (gridArray[toIntX - 1][toIntY]) {cellsAlive + 1}
+    if (gridArray[cellPosX][toIntY - 1]) {cellsAlive + 1}
+    if (gridArray[toIntX + 1][toIntY - 1]) {cellsAlive + 1}
+    if (gridArray[toIntX - 1][toIntY + 1]) {cellsAlive + 1}
     if (cellsAlive < 2) {currentCell = false} //Underpopulation
     if (cellsAlive === 2 || cellsAlive === 3) {currentCell = true} //NextGen
     if (cellsAlive > 3) {currentCell = false} //Overpopulation
   } else if(!currentCell) {
-    if (gridArray[cellPosX + 1][cellPosY + 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX + 1][cellPosY]) {cellsAlive + 1}
-    if (gridArray[cellPosX][cellPosY + 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX - 1][cellPosY - 1]) {cellsAlive + 1}
-    if (gridArray[cellPosX - 1][cellPosY]) {cellsAlive + 1}
-    if (gridArray[cellPosX][cellPosY - 1]) {cellsAlive + 1}
+    if (gridArray[toIntX + 1][cellPosY + 1]) {cellsAlive + 1}
+    if (gridArray[toIntX + 1][cellPosY]) {cellsAlive + 1}
+    if (gridArray[toIntX][toIntY + 1]) {cellsAlive + 1}
+    if (gridArray[toIntX - 1][toIntY - 1]) {cellsAlive + 1}
+    if (gridArray[toIntX - 1][cellPosY]) {cellsAlive + 1}
+    if (gridArray[toIntX][toIntY - 1]) {cellsAlive + 1}
+    if (gridArray[toIntX + 1][toIntY - 1]) {cellsAlive + 1}
+    if (gridArray[toIntX - 1][toIntY + 1]) {cellsAlive + 1}
     if (cellsAlive === 3) {currentCell = true} //Reproduction
   }
 }
