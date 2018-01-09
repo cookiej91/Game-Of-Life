@@ -1,8 +1,4 @@
 /* The Game Of Life
-1) Cell < 2 Neighbours cell dies (Underpopulation)
-2) Cell has exactly 2 or 3 neighbours Cell lives (NextGen)
-3) Cell > 3 Neighbours cell dies (Overpopulation)
-4) Empty cell has EXACTLY 3 neighbours cell becomes alive (Reproduction)
 
 Boolean:
 1 == Cell is alive
@@ -40,5 +36,32 @@ function populateGrid(height, width) {
     }
   }
 }
+
+function render(cellPosX, cellPosY) {
+  let cell = document.getElementById(`${cellPosX}:${cellPosY}`);
+  cell.innerHTML = gridArray[cellPosX][cellPosY];
+}
+
+function checkRules(cellPosX, cellPosY) {
+  let currentCell == gridArray[cellPosX][cellPosY]
+  let cellsAlive = 0;
+  //kill cell if Underpopulated
+  if (currentCell === true){
+    if (gridArray[cellPosX + 1][cellPosY + 1]) {cellsAlive + 1}
+    if (gridArray[cellPosX + 1][cellPosY]) {cellsAlive + 1}
+    if (gridArray[cellPosX][cellPosY + 1]) {cellsAlive + 1}
+    if (gridArray[cellPosX - 1][cellPosY - 1]) {cellsAlive + 1}
+    if (gridArray[cellPosX - 1][cellPosY]) {cellsAlive + 1}
+    if (gridArray[cellPosX][cellPosY - 1]) {cellsAlive + 1}
+    if (cellsAlive < 2) {currentCell = false}
+  }
+}
+/*
+rules and step by step function
+1) Cell < 2 Neighbours cell dies (Underpopulation)
+2) Cell has exactly 2 or 3 neighbours Cell lives (NextGen)
+3) Cell > 3 Neighbours cell dies (Overpopulation)
+4) Empty cell has EXACTLY 3 neighbours cell becomes alive (Reproduction)*/
+
 
 populateGrid(20,20);
