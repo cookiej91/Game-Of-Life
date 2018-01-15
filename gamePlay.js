@@ -35,15 +35,28 @@ function checkRules(cellPosX, cellPosY) {
   }
 }
 
-function stepForward() {
 //click button to stepforward one generation
+var pause;
+
+function stepForward() {
+  this.addEventListener('click', function() {
+    checkRules(x, y);
+  })
 }
 
 function autoPlay() {
-  //stepForward everyone 1 seconds
-
+  //stepForward everyone 2 seconds
+  this.addEventListener('click', function() {
+    pause = true;
+    while(pause) {
+      setTimeout(stepForward(), 2000);
+    }
+  })
 }
 
 function pauseButton() {
   //stop autoPlay
+  this.addEventListener('click', function() {
+    pause = false;
+  })
 }
