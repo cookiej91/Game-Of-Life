@@ -34,3 +34,16 @@ function checkRules(cellPosX, cellPosY) {
     if (cellsAlive === 3) {currentCell = true; console.log("Reproduction")} //Reproduction
   }
 }
+
+function stepForward() {
+//click button to stepforward one generation
+}
+
+function autoPlay() {
+  //stepForward everyone 1 seconds
+
+}
+
+function pauseButton() {
+  //stop autoPlay
+}
