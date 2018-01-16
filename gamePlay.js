@@ -36,27 +36,27 @@ function checkRules(cellPosX, cellPosY) {
 }
 
 //click button to stepforward one generation
-var pause;
 
 function stepForward() {
-  this.addEventListener('click', function() {
+  let stepForward = document.getElementById('step')
+  stepForward.addEventListener('click', function() {
     checkRules(x, y);
   })
 }
 
+//stepForward everyone 2 seconds
 function autoPlay() {
-  //stepForward everyone 2 seconds
-  this.addEventListener('click', function() {
-    pause = true;
-    while(pause) {
-      setTimeout(stepForward(), 2000);
-    }
+  console.log(document.getElementById('button'))
+  let auto = document.getElementById('auto');
+  auto.addEventListener('click', function() {
+      setInterval(stepForward(), 2000);
   })
 }
 
+//stop autoPlay
 function pauseButton() {
-  //stop autoPlay
-  this.addEventListener('click', function() {
+  let pause = document.getElementById("pause");
+  pause.addEventListener('click', function() {
     pause = false;
   })
 }

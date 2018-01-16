@@ -13,11 +13,13 @@ var gridArray = [];
 
 //populate grid with cells takes height and width
 function populateGrid(height, width) {
+  let gameDiv = document.getElementById('gamePlay');
+
   for (let i = 0; i < height; i++) {
     gridArray[i] = [];
     let row = document.createElement('div');
     row.className = "inline";
-    document.body.appendChild(row);
+    gameDiv.appendChild(row);
 
     for (let j = 0; j < width; j++) {
       let cell = document.createElement('div');
