@@ -35,28 +35,22 @@ function checkRules(cellPosX, cellPosY) {
   }
 }
 
-var refreshIntervalId = setInterval(stepForward(), 2000);
+var refreshIntervalId;
 
 //click button to stepforward one generation
 function stepForward() {
-  let stepForward = document.getElementById('step')
-  stepForward.addEventListener('click', function() {
-    checkRules(x, y);
-  })
+  //checkRules(x, y);
+  console.log("stepping forward")
 }
 
 //stepForward everyone 2 seconds
 function autoPlay() {
-  let auto = document.getElementById('auto');
-  auto.addEventListener('click', function() {
-      refreshIntervalId();
-  })
+  console.log("auto")
+  refreshIntervalId = setInterval(function() {stepForward()}, 2000);
 }
 
 //stop autoPlay
 function pauseButton() {
-  let pause = document.getElementById("pause");
-  pause.addEventListener('click', function() {
-    clearInterval(setInterval(stepForward(), 2000));
-  })
+  console.log("pause")
+  clearInterval(refreshIntervalId);
 }
