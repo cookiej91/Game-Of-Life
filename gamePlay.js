@@ -35,8 +35,9 @@ function checkRules(cellPosX, cellPosY) {
   }
 }
 
-//click button to stepforward one generation
+var refreshIntervalId = setInterval(stepForward(), 2000);
 
+//click button to stepforward one generation
 function stepForward() {
   let stepForward = document.getElementById('step')
   stepForward.addEventListener('click', function() {
@@ -46,10 +47,9 @@ function stepForward() {
 
 //stepForward everyone 2 seconds
 function autoPlay() {
-  console.log(document.getElementById('button'))
   let auto = document.getElementById('auto');
   auto.addEventListener('click', function() {
-      setInterval(stepForward(), 2000);
+      refreshIntervalId();
   })
 }
 
@@ -57,6 +57,6 @@ function autoPlay() {
 function pauseButton() {
   let pause = document.getElementById("pause");
   pause.addEventListener('click', function() {
-    pause = false;
+    clearInterval(setInterval(stepForward(), 2000));
   })
 }
