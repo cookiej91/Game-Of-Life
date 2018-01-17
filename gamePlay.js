@@ -35,9 +35,24 @@ function checkRules(cellPosX, cellPosY) {
   }
 }
 
-var refreshIntervalId;
 
-//click button to stepforward one generation
+var refreshIntervalId;
+var stepButton = document.getElementById('step')
+var autoButton = document.getElementById('auto')
+var pauseButton = document.getElementById('pause')
+
+stepButton.addEventListener('click', function(event) {
+  stepForward();
+});
+
+autoButton.addEventListener('click', function(event) {
+  autoPlay();
+});
+
+pauseButton.addEventListener('click', function(event) {
+  pauseButton();
+});
+
 function stepForward() {
   //checkRules(x, y);
   console.log("stepping forward")
