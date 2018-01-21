@@ -35,14 +35,14 @@ function checkRules(cellPosX, cellPosY) {
   }
 }
 
-
 var refreshIntervalId;
 var stepButton = document.getElementById('step')
 var autoButton = document.getElementById('auto')
 var pauseButton = document.getElementById('pause')
 
+//rendering to screen needs to be resolved
 stepButton.addEventListener('click', function(event) {
-  stepForward();
+  console.log("stepping forward")
 });
 
 autoButton.addEventListener('click', function(event) {
@@ -50,7 +50,7 @@ autoButton.addEventListener('click', function(event) {
 });
 
 pauseButton.addEventListener('click', function(event) {
-  pauseButton();
+  pause();
 });
 
 function stepForward() {
@@ -58,14 +58,12 @@ function stepForward() {
   console.log("stepping forward")
 }
 
-//stepForward everyone 2 seconds
 function autoPlay() {
   console.log("auto")
   refreshIntervalId = setInterval(function() {stepForward()}, 2000);
 }
 
-//stop autoPlay
-function pauseButton() {
+function pause() {
   console.log("pause")
   clearInterval(refreshIntervalId);
 }

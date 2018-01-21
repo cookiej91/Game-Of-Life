@@ -9,6 +9,7 @@ var dead = false;
 var alive = true;
 
 //declare gridArray
+//need to use LinkedList
 var gridArray = [];
 
 //populate grid with cells takes height and width
@@ -33,6 +34,7 @@ function populateGrid(height, width) {
         let x = event.currentTarget.getAttribute('x');
         let y = event.currentTarget.getAttribute('y');
         gridArray[x][y] = !gridArray[x][y]
+        //how should the rule check happen
         render(x,y);
         checkRules(x,y);
         render(x,y);
