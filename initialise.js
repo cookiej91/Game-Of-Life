@@ -1,5 +1,4 @@
 /* The Game Of Life
-
 Boolean:
 1 == Cell is alive
 0 == Cell is Dead
