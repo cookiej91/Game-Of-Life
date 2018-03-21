@@ -4,40 +4,33 @@ rules and step by step function
 2) Cell has exactly 2 or 3 neighbours Cell lives (NextGen)
 3) Cell > 3 Neighbours cell dies (Overpopulation)
 4) Empty cell has EXACTLY 3 neighbours cell becomes alive (Reproduction)*/
-function checkRules(cellPosX, cellPosY) {
-  let currentCell = gridArray[cellPosX][cellPosY]
-  var cellsAlive = 0;
-  let toIntX = parseInt(cellPosX);
-  let toIntY = parseInt(cellPosY);
 
-  // is (toIntX + 1) > xlength ? if it is, then toIntX = 0
-  // do the same with y
-  // also need to check toIntX - 1 < 0
+function checkRules(array, cellPosX, cellPosY) {
+  let currentCell = array[cellPosX][cellPosY]
+  let neighbours = numNeighbours(array, cellPosX, cellPosY)
 
-  if (currentCell && gridArray[toIntX + 1] != null && gridArray[toIntY + 1] != null && gridArray[toIntX - 1] != null && gridArray[toIntY - 1]) {
-    if (gridArray[toIntX + 1][toIntY + 1]) {cellsAlive += 1}
-    if (gridArray[toIntX + 1][toIntY]) {cellsAlive += 1}
-    if (gridArray[cellPosX][toIntY + 1]) {cellsAlive += 1}
-    if (gridArray[toIntX - 1][toIntY - 1]) {cellsAlive += 1}
-    if (gridArray[toIntX - 1][toIntY]) {cellsAlive += 1}
-    if (gridArray[cellPosX][toIntY - 1]) {cellsAlive += 1}
-    if (gridArray[toIntX + 1][toIntY - 1]) {cellsAlive += 1}
-    if (gridArray[toIntX - 1][toIntY + 1]) {cellsAlive += 1}
-    if (cellsAlive < 2) {currentCell = false; console.log("Underpopulation")} //Underpopulation
-    if (cellsAlive === 2 || cellsAlive === 3) {currentCell = true; console.log("NextGen")} //NextGen
-    if (cellsAlive > 3) {currentCell = false; console.log("Overpopulation")} //Overpopulation
-    console.log(cellsAlive)
-  } else if(!currentCell && gridArray[toIntX + 1] != null && gridArray[toIntY + 1] != null && gridArray[toIntX - 1] != null && gridArray[toIntY - 1]) {
-    if (gridArray[toIntX + 1][cellPosY + 1]) {cellsAlive += 1}
-    if (gridArray[toIntX + 1][cellPosY]) {cellsAlive += 1}
-    if (gridArray[toIntX][toIntY + 1]) {cellsAlive += 1}
-    if (gridArray[toIntX - 1][toIntY - 1]) {cellsAlive += 1}
-    if (gridArray[toIntX - 1][cellPosY]) {cellsAlive += 1}
-    if (gridArray[toIntX][toIntY - 1]) {cellsAlive += 1}
-    if (gridArray[toIntX + 1][toIntY - 1]) {cellsAlive += 1}
-    if (gridArray[toIntX - 1][toIntY + 1]) {cellsAlive += 1}
-    if (cellsAlive === 3) {currentCell = true; console.log("Reproduction")} //Reproduction
+  if (currentCell) {
+    return neighbours === 2 || neighbours === 3
+  } else {
+    return neighbours === 3
   }
+}
+
+function numNeighbours(array, x, y) {
+  //check number of neighbours by checking the bounds
+  //x+1 = x0 // x - 1 = array.length
+  //y+1 = y0 // y - 1 = array.length
+  let neighbours = 0
+
+  for (var i = x - 1; i <= x + 1; i++) {
+    for (var j = y - 1; j <= y + 1; j++) {
+      var currentCellPosition = i === x && j === y
+      if (!currentCellPosition && i >= 0 && i <= array.length && j >= 0 && j < array.length && array[i][j]) {
+        neighbours += 1
+      }
+    }
+  }
+  return neighbours
 }
 
 var refreshIntervalId;
@@ -47,7 +40,7 @@ var pauseButton = document.getElementById('pause')
 
 //rendering to screen needs to be resolved
 stepButton.addEventListener('click', function(event) {
-  console.log("stepping forward")
+  stepForward();
 });
 
 autoButton.addEventListener('click', function(event) {
@@ -71,12 +64,23 @@ function stepForward() {
   // [1,0][1,1][1,2]
   // [2,0][2,1][2,2]
   //to iterate over gridArray to check rules on each cell
-  for(let x = 0; x < gridArray.length - 1; x++) {
-    for(let y= 0; y < gridArray.length -1; y++) {
-      checkRules(gridArray[x], gridArray[y]);
+
+  // Set up temporary array [gridArray.length] x [gridArray.length]
+  let tempGridArray = new Array(gridArray.length)
+  for (let i = 0; i < tempGridArray.length; i++) {
+    tempGridArray[i] = []
+  }
+
+  let x, y = 0
+  for(x = 0; x < gridArray.length - 1; x++) {
+    for(y = 0; y < gridArray.length - 1; y++) {
+      tempGridArray[x][y] = checkRules(gridArray, x, y)
     }
   }
 
+  debugger
+  gridArray = tempGridArray
+  rerender(gridArray)
   console.log("stepping forward")
 }
 
@@ -88,4 +92,13 @@ function autoPlay() {
 function pause() {
   console.log("pause")
   clearInterval(refreshIntervalId);
+}
+
+function rerender(array) {
+  for(let i = 0; i < array.length - 1; i++) {
+    for(let j = 0; j < array.length - 1; j++) {
+      let cell = document.getElementById(`${i}:${j}`)
+      cell.innerHTML = array[i][j]
+    }
+  }
 }

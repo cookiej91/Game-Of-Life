@@ -35,8 +35,6 @@ function populateGrid(height, width) {
         gridArray[x][y] = !gridArray[x][y]
         //how should the rule check happen
         render(x,y);
-        checkRules(x,y);
-        render(x,y);
       });
     }
   }
