@@ -1,5 +1,4 @@
-/*
-rules and step by step function
+/*rules and step by step function
 1) Cell < 2 Neighbours cell dies (Underpopulation)
 2) Cell has exactly 2 or 3 neighbours Cell lives (NextGen)
 3) Cell > 3 Neighbours cell dies (Overpopulation)
@@ -16,6 +15,8 @@ function checkRules(array, cellPosX, cellPosY) {
   }
 }
 
+//by checking the number of neighbours this will be able to give an
+//accurate response to the next state the currentCell should be in
 function numNeighbours(array, x, y) {
   //check number of neighbours by checking the bounds
   //x+1 = x0 // x - 1 = array.length
@@ -33,6 +34,7 @@ function numNeighbours(array, x, y) {
   return neighbours
 }
 
+//checking bounds to wrap existing array onto itself which will in itself be torus
 function checkBounds(axis, array) {
   //check x+1 // y + 1
   if(axis + 1 >= array.length) {
@@ -51,7 +53,7 @@ var stepButton = document.getElementById('step')
 var autoButton = document.getElementById('auto')
 var pauseButton = document.getElementById('pause')
 
-//rendering to screen needs to be resolved
+//event listeners
 stepButton.addEventListener('click', function(event) {
   stepForward();
 });
@@ -64,6 +66,7 @@ pauseButton.addEventListener('click', function(event) {
   pause();
 });
 
+//stepForward populates the new gridArray by checking the rules against the old array and populating results from that
 function stepForward() {
   let tempGridArray = new Array(gridArray.length)
   for (let i = 0; i < tempGridArray.length; i++) {
@@ -87,11 +90,13 @@ function autoPlay() {
   refreshIntervalId = setInterval(function() {stepForward()}, 2000);
 }
 
+//pause() stops the autoPlay()
 function pause() {
   console.log("pause")
   clearInterval(refreshIntervalId);
 }
 
+//rerendering the grid after new gridArray has been populated with correct results
 function rerender(array) {
   for(let i = 0; i < array.length - 1; i++) {
     for(let j = 0; j < array.length - 1; j++) {

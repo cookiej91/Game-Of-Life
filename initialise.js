@@ -8,7 +8,6 @@ var dead = false;
 var alive = true;
 
 //declare gridArray
-//need to use LinkedList
 var gridArray = [];
 
 //populate grid with cells takes height and width
