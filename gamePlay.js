@@ -33,6 +33,19 @@ function numNeighbours(array, x, y) {
   return neighbours
 }
 
+function checkBounds(axis, array) {
+  //check x+1 // y + 1
+  if(axis + 1 >= array.length) {
+    axis = 0
+  }
+
+  //check x-1 // y - 1
+  if(axis - 1 < -1) {
+    axis = array.length - 1
+  }
+  return axis
+}
+
 var refreshIntervalId;
 var stepButton = document.getElementById('step')
 var autoButton = document.getElementById('auto')
@@ -52,20 +65,6 @@ pauseButton.addEventListener('click', function(event) {
 });
 
 function stepForward() {
-  // you know how wide the grid is... 0 ... x
-  // you know how long the grid is... 0 ... y
-
-  // you need to to apply the rules to every cell
-
-  // but... you can't just apply the rules to the existing grid, you
-  // need to apply them to a temporary grid
-
-  // [0,0][0,1][0,2]
-  // [1,0][1,1][1,2]
-  // [2,0][2,1][2,2]
-  //to iterate over gridArray to check rules on each cell
-
-  // Set up temporary array [gridArray.length] x [gridArray.length]
   let tempGridArray = new Array(gridArray.length)
   for (let i = 0; i < tempGridArray.length; i++) {
     tempGridArray[i] = []
@@ -78,7 +77,6 @@ function stepForward() {
     }
   }
 
-  debugger
   gridArray = tempGridArray
   rerender(gridArray)
   console.log("stepping forward")
@@ -99,6 +97,7 @@ function rerender(array) {
     for(let j = 0; j < array.length - 1; j++) {
       let cell = document.getElementById(`${i}:${j}`)
       cell.innerHTML = array[i][j]
+      colourChange(cell)
     }
   }
 }

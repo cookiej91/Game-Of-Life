@@ -26,6 +26,7 @@ function populateGrid(height, width) {
       cell.id = `${i}:${j}`
       gridArray[i][j] = dead;
       cell.innerHTML = gridArray[i][j];
+      colourChange(cell)
       cell.setAttribute('x', `${i}`)
       cell.setAttribute('y', `${j}`)
       row.appendChild(cell)
@@ -33,7 +34,6 @@ function populateGrid(height, width) {
         let x = event.currentTarget.getAttribute('x');
         let y = event.currentTarget.getAttribute('y');
         gridArray[x][y] = !gridArray[x][y]
-        //how should the rule check happen
         render(x,y);
       });
     }
@@ -41,8 +41,19 @@ function populateGrid(height, width) {
 }
 
 function render(cellPosX, cellPosY) {
-  let cell = document.getElementById(`${cellPosX}:${cellPosY}`);
-  cell.innerHTML = gridArray[cellPosX][cellPosY];
+  let cell = document.getElementById(`${cellPosX}:${cellPosY}`)
+  cell.innerHTML = gridArray[cellPosX][cellPosY]
+  colourChange(cell);
 }
 
-populateGrid(20,20);
+//To enhance viewability the colourChange function provides
+//alive cells to have green text and dead cells to have red text
+function colourChange(cell) {
+  if(cell.innerHTML == 'false') {
+    cell.style.color = "red"
+  } else {
+    cell.style.color = "green"
+  }
+}
+
+populateGrid(10,10);
