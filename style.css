@@ -3,9 +3,18 @@
   margin: 3px;
 }
 
-#buttons {
+#pause {
+  font-size: 25px;
+}
 
+#auto {
+  font-size: 25px;
+}
+
+#step {
+  font-size: 25px;
 }
 
 #gamePlay {
+  font-size: 25px;
 }
