@@ -1,20 +1,4 @@
 .inline {
   display: inline-block;
-  margin: 3px;
-}
-
-#pause {
-  font-size: 25px;
-}
-
-#auto {
-  font-size: 25px;
-}
-
-#step {
-  font-size: 25px;
-}
-
-#gamePlay {
-  font-size: 25px;
+  margin: 2px
 }

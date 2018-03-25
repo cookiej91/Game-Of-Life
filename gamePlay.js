@@ -23,10 +23,17 @@ function numNeighbours(array, x, y) {
   //y+1 = y0 // y - 1 = array.length
   let neighbours = 0
 
+  //why x - 1 and y - 1?
   for (var i = x - 1; i <= x + 1; i++) {
     for (var j = y - 1; j <= y + 1; j++) {
       var currentCellPosition = i === x && j === y
-      if (!currentCellPosition && i >= 0 && i <= array.length && j >= 0 && j < array.length && array[i][j]) {
+    //&& array[i][j] - the end of this if I get this error
+    // Uncaught TypeError: Cannot read property '0' of undefined
+    // at numNeighbours (gamePlay.js:32)
+    // at checkRules (gamePlay.js:9)
+    // at stepForward (gamePlay.js:83)
+    // at HTMLButtonElement.<anonymous> (gamePlay.js:61)
+      if (!currentCellPosition && i >= 0 && i <= array.length && j >= 0 && j <= array.length && array[i][j]) {
         neighbours += 1
       }
     }
@@ -34,19 +41,19 @@ function numNeighbours(array, x, y) {
   return neighbours
 }
 
-//checking bounds to wrap existing array onto itself which will in itself be torus
-function checkBounds(axis, array) {
-  //check x+1 // y + 1
-  if(axis + 1 >= array.length) {
-    axis = 0
-  }
-
-  //check x-1 // y - 1
-  if(axis - 1 < -1) {
-    axis = array.length - 1
-  }
-  return axis
-}
+// //checking bounds to wrap existing array onto itself which will in itself be torus
+// function checkBounds(axis, array) {
+//   //check x+1 // y + 1
+//   if(axis + 1 >= array.length) {
+//     axis = 0
+//   }
+//
+//   //check x-1 // y - 1
+//   if(axis - 1 < -1) {
+//     axis = array.length - 1
+//   }
+//   return axis
+// }
 
 var refreshIntervalId;
 var stepButton = document.getElementById('step')
@@ -68,14 +75,15 @@ pauseButton.addEventListener('click', function(event) {
 
 //stepForward populates the new gridArray by checking the rules against the old array and populating results from that
 function stepForward() {
+  debugger
   let tempGridArray = new Array(gridArray.length)
   for (let i = 0; i < tempGridArray.length; i++) {
     tempGridArray[i] = []
   }
 
   let x, y = 0
-  for(x = 0; x < gridArray.length - 1; x++) {
-    for(y = 0; y < gridArray.length - 1; y++) {
+  for(x = 0; x < gridArray.length; x++) {
+    for(y = 0; y < gridArray.length; y++) {
       tempGridArray[x][y] = checkRules(gridArray, x, y)
     }
   }
