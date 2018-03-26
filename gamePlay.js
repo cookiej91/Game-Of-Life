@@ -75,15 +75,13 @@ pauseButton.addEventListener('click', function(event) {
 
 //stepForward populates the new gridArray by checking the rules against the old array and populating results from that
 function stepForward() {
-  debugger
   let tempGridArray = new Array(gridArray.length)
   for (let i = 0; i < tempGridArray.length; i++) {
     tempGridArray[i] = []
   }
 
-  let x, y = 0
-  for(x = 0; x < gridArray.length; x++) {
-    for(y = 0; y < gridArray.length; y++) {
+  for(let x = 0; x < gridArray.length - 1; x++) {
+    for(let y = 0; y < gridArray.length - 1; y++) {
       tempGridArray[x][y] = checkRules(gridArray, x, y)
     }
   }

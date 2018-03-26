@@ -1,4 +1,19 @@
+#gamePlay {
+  text-align: center;
+}
+
 .inline {
   display: inline-block;
-  margin: 2px
+  border-style: solid;
+  border: 1px;
+}
+
+.inline div {
+  border: 1px solid black;
+  text-align: center;
+}
+
+#buttons {
+  margin: 10px;
+  text-align: center;
 }
