@@ -24,6 +24,7 @@ function numNeighbours(array, x, y) {
   //check number of neighbours by checking the bounds
   //x+1 = x0 // x - 1 = array.length
   //y+1 = y0 // y - 1 = array.length
+  checkBounds()
   let neighbours = 0
 
   for (var i = x - 1; i <= x + 1; i++) {
@@ -37,19 +38,19 @@ function numNeighbours(array, x, y) {
   return neighbours
 }
 
-// //checking bounds to wrap existing array onto itself which will in itself be torus
-// function checkBounds(axis, array) {
-//   //check x+1 // y + 1
-//   if(axis + 1 >= array.length) {
-//     axis = 0
-//   }
-//
-//   //check x-1 // y - 1
-//   if(axis - 1 < -1) {
-//     axis = array.length - 1
-//   }
-//   return axis
-// }
+//checking bounds to wrap existing array onto itself which will in itself be torus
+function newAxisValue(axis, array) {
+  //check x+1 // y + 1
+  if(axis + 1 >= array.length - 1) {
+    axis = 0
+  }
+
+  //check x-1 // y - 1
+  if(axis - 1 < -1) {
+    axis = array.length - 1
+  }
+  return axis
+}
 
 var refreshIntervalId;
 var stepButton = document.getElementById('step')
