@@ -3,7 +3,6 @@
 2) Cell has exactly 2 or 3 neighbours Cell lives (NextGen)
 3) Cell > 3 Neighbours cell dies (Overpopulation)
 4) Empty cell has EXACTLY 3 neighbours cell becomes alive (Reproduction)*/
-
 function checkRules(array, cellPosX, cellPosY) {
   let currentCell = array[cellPosX][cellPosY]
   let neighbours = numNeighbours(array, cellPosX, cellPosY)
@@ -17,9 +16,6 @@ function checkRules(array, cellPosX, cellPosY) {
 //by checking the number of neighbours this will be able to give an
 //accurate response to the next state the currentCell should be in
 function numNeighbours(array, x, y) {
-  //check number of neighbours by checking the bounds
-  //x+1 = x0 // x - 1 = array.length
-  //y+1 = y0 // y - 1 = array.length
   let neighbours = 0
 
   for (var i = x - 1; i <= x + 1; i++) {
@@ -36,15 +32,12 @@ function numNeighbours(array, x, y) {
   return neighbours
 }
 
-//checking bounds to wrap existing array onto itself which will in itself be torus
 function wrapPosition(position, array) {
-  //check x+1 // y + 1
-  if (position + 1 > array.length - 1) {
+  if (position > array.length - 1) {
     position = 0
   }
 
-  //check x-1 // y - 1
-  if (position - 1 < 0) {
+  if (position < 0) {
     position = array.length - 1
   }
   return position
@@ -57,16 +50,16 @@ var pauseButton = document.getElementById('pause')
 
 //event listeners
 stepButton.addEventListener('click', function(event) {
-  stepForward();
-});
+  stepForward()
+})
 
 autoButton.addEventListener('click', function(event) {
-  autoPlay();
-});
+  autoPlay()
+})
 
 pauseButton.addEventListener('click', function(event) {
-  pause();
-});
+  pause()
+})
 
 //stepForward populates the new gridArray by checking the rules against the old array and populating results from that
 function stepForward() {
@@ -82,17 +75,14 @@ function stepForward() {
   }
   gridArray = tempGridArray
   rerender(gridArray)
-  console.log("stepping forward")
 }
 
 function autoPlay() {
-  console.log("auto")
-  refreshIntervalId = setInterval(function() {stepForward()}, 2000)
+  refreshIntervalId = setInterval(function() {stepForward()}, 250)
 }
 
 //pause() stops the autoPlay()
 function pause() {
-  console.log("pause")
   clearInterval(refreshIntervalId)
 }
 
