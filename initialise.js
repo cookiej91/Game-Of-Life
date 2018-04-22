@@ -55,4 +55,4 @@ function colourChange(cell) {
   }
 }
 
-populateGrid(3,3)
+populateGrid(5,5)

@@ -9,13 +9,9 @@ function checkRules(array, cellPosX, cellPosY) {
   let neighbours = numNeighbours(array, cellPosX, cellPosY)
   if (currentCell) {
     return neighbours === 2 || neighbours === 3
-  } else if(!currentCell && neighbours !== 3) {
-    return false
   } else {
     return neighbours === 3
   }
-
-
 }
 
 //by checking the number of neighbours this will be able to give an
@@ -24,13 +20,15 @@ function numNeighbours(array, x, y) {
   //check number of neighbours by checking the bounds
   //x+1 = x0 // x - 1 = array.length
   //y+1 = y0 // y - 1 = array.length
-  checkBounds()
   let neighbours = 0
 
   for (var i = x - 1; i <= x + 1; i++) {
+    newPositionX = wrapPosition(i, array)
     for (var j = y - 1; j <= y + 1; j++) {
+      debugger
+      newPositionY = wrapPosition(j, array)
       var currentCellPosition = i === x && j === y
-      if (!currentCellPosition && i >= 0 && i < array.length && j >= 0 && j < array.length && array[i][j]) {
+      if (!currentCellPosition && array[newPositionX][newPositionY]) {
         neighbours += 1
       }
     }
@@ -39,17 +37,17 @@ function numNeighbours(array, x, y) {
 }
 
 //checking bounds to wrap existing array onto itself which will in itself be torus
-function newAxisValue(axis, array) {
+function wrapPosition(position, array) {
   //check x+1 // y + 1
-  if(axis + 1 >= array.length - 1) {
-    axis = 0
+  if (position + 1 > array.length - 1) {
+    position = 0
   }
 
   //check x-1 // y - 1
-  if(axis - 1 < -1) {
-    axis = array.length - 1
+  if (position - 1 < 0) {
+    position = array.length - 1
   }
-  return axis
+  return position
 }
 
 var refreshIntervalId;
@@ -82,7 +80,6 @@ function stepForward() {
       tempGridArray[x][y] = checkRules(gridArray, x, y)
     }
   }
-  debugger
   gridArray = tempGridArray
   rerender(gridArray)
   console.log("stepping forward")
