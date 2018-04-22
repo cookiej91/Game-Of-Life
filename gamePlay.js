@@ -7,12 +7,15 @@
 function checkRules(array, cellPosX, cellPosY) {
   let currentCell = array[cellPosX][cellPosY]
   let neighbours = numNeighbours(array, cellPosX, cellPosY)
-
   if (currentCell) {
     return neighbours === 2 || neighbours === 3
+  } else if(!currentCell && neighbours !== 3) {
+    return false
   } else {
     return neighbours === 3
   }
+
+
 }
 
 //by checking the number of neighbours this will be able to give an
@@ -23,17 +26,10 @@ function numNeighbours(array, x, y) {
   //y+1 = y0 // y - 1 = array.length
   let neighbours = 0
 
-  //why x - 1 and y - 1?
   for (var i = x - 1; i <= x + 1; i++) {
     for (var j = y - 1; j <= y + 1; j++) {
       var currentCellPosition = i === x && j === y
-    //&& array[i][j] - the end of this if I get this error
-    // Uncaught TypeError: Cannot read property '0' of undefined
-    // at numNeighbours (gamePlay.js:32)
-    // at checkRules (gamePlay.js:9)
-    // at stepForward (gamePlay.js:83)
-    // at HTMLButtonElement.<anonymous> (gamePlay.js:61)
-      if (!currentCellPosition && i >= 0 && i <= array.length && j >= 0 && j <= array.length && array[i][j]) {
+      if (!currentCellPosition && i >= 0 && i < array.length && j >= 0 && j < array.length && array[i][j]) {
         neighbours += 1
       }
     }
@@ -76,16 +72,16 @@ pauseButton.addEventListener('click', function(event) {
 //stepForward populates the new gridArray by checking the rules against the old array and populating results from that
 function stepForward() {
   let tempGridArray = new Array(gridArray.length)
-  for (let i = 0; i < tempGridArray.length; i++) {
+  for (let i = 0; i < gridArray.length; i++) {
     tempGridArray[i] = []
   }
 
-  for(let x = 0; x < gridArray.length - 1; x++) {
-    for(let y = 0; y < gridArray.length - 1; y++) {
+  for(let x = 0; x <= gridArray.length - 1; x++) {
+    for(let y = 0; y <= gridArray.length - 1; y++) {
       tempGridArray[x][y] = checkRules(gridArray, x, y)
     }
   }
-
+  debugger
   gridArray = tempGridArray
   rerender(gridArray)
   console.log("stepping forward")
@@ -93,19 +89,19 @@ function stepForward() {
 
 function autoPlay() {
   console.log("auto")
-  refreshIntervalId = setInterval(function() {stepForward()}, 2000);
+  refreshIntervalId = setInterval(function() {stepForward()}, 2000)
 }
 
 //pause() stops the autoPlay()
 function pause() {
   console.log("pause")
-  clearInterval(refreshIntervalId);
+  clearInterval(refreshIntervalId)
 }
 
 //rerendering the grid after new gridArray has been populated with correct results
 function rerender(array) {
-  for(let i = 0; i < array.length - 1; i++) {
-    for(let j = 0; j < array.length - 1; j++) {
+  for(let i = 0; i <= array.length - 1; i++) {
+    for(let j = 0; j <= array.length - 1; j++) {
       let cell = document.getElementById(`${i}:${j}`)
       cell.innerHTML = array[i][j]
       colourChange(cell)
