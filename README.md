@@ -1,2 +1,2 @@
 # Game Of Life
-## [Try It](https://cookiej91.github.io/Game-Of-Life/Index.html)
+## [Try It](https://josh-cook.github.io/Game-Of-Life/Index.html)
