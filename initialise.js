@@ -4,11 +4,11 @@ Boolean:
 0 == Cell is Dead
 */
 // declare bool values to set cell to on or off
-var dead = false;
-var alive = true;
+let dead = false;
+let alive = true;
 
 //declare gridArray
-const gridArray = [];
+let gridArray = [];
 
 //populate grid with cells takes height and width
 function populateGrid(height, width) {
@@ -38,6 +38,7 @@ function populateGrid(height, width) {
     }
   }
 }
+
 //rendering to view from model
 function render(cellPosX, cellPosY) {
   let cell = document.getElementById(`${cellPosX}:${cellPosY}`);

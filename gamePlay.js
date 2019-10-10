@@ -21,7 +21,6 @@ function numNeighbours(array, x, y) {
   for (var i = x - 1; i <= x + 1; i++) {
     newPositionX = wrapPosition(i, array);
     for (var j = y - 1; j <= y + 1; j++) {
-      debugger;
       newPositionY = wrapPosition(j, array);
       var currentCellPosition = i === x && j === y;
       if (!currentCellPosition && array[newPositionX][newPositionY]) {
@@ -49,15 +48,15 @@ let autoButton = document.getElementById("auto");
 let pauseButton = document.getElementById("pause");
 
 //event listeners
-stepButton.addEventListener("click", function(event) {
+stepButton.addEventListener("click", () => {
   stepForward();
 });
 
-autoButton.addEventListener("click", function(event) {
+autoButton.addEventListener("click", () => {
   autoPlay();
 });
 
-pauseButton.addEventListener("click", function(event) {
+pauseButton.addEventListener("click", () => {
   pause();
 });
 
@@ -78,7 +77,7 @@ function stepForward() {
 }
 
 function autoPlay() {
-  refreshIntervalId = setInterval(function() {
+  refreshIntervalId = setInterval(() => {
     stepForward();
   }, 250);
 }
